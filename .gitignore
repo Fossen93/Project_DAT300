@@ -4,5 +4,5 @@ data/preprocessed/
 data/interim/
 Master_thesis.egg-info
 
-!.data/raw/.keep
+!data/raw/.keep
 
