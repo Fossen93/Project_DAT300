@@ -1,7 +1,9 @@
 #config
 
 #Paths
-path_gen = '../data/preprocessed'
+path_gen_masks = ''
+path_gen_images = ''
+path_pre_images = ''
 
 
 
