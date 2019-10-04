@@ -8,28 +8,8 @@ from src.config.wgan import *
 from src.attributes import *
 from fastai.vision import *
 
-def setup_data_directory(model_id):
-    gen_images = path_gen + '/generated_images'
-    gen_masks = path_gen + '/generated_masks'
-    pre_images = path_gen + '/pretrained_images'
-    
-    create_dir(gen_images)
-    create_dir(gen_masks)
-    create_dir(pre_images)
-        
-    create_dir(gen_images + '/wgan')
-    create_dir(gen_masks + '/wgan')
-    create_dir(pre_images + '/wgan')
-        
-    create_dir(gen_images + '/wgan/' + model_id)
-    create_dir(gen_masks + '/wgan/' + model_id)
-    create_dir(pre_images + '/wgan/' + model_id)
-        
-    path_gen_images = gen_images + '/wgan/' + model_id
-    path_gen_masks = gen_masks + '/wgan/' + model_id
-    path_pre_images = gen_masks + '/wgan/' + model_id
-    
 
+    
 def save_pred(generator, path, num_gen):
     if (os.path.isdir(path)==False): os.mkdir(path)
     for i in range(num_gen):

@@ -15,4 +15,10 @@ path_models = '../models/'
 path_trainingset = '../data/raw/train_segmentation.csv'
 path_testset = '../data/raw/test_segmentation.csv'
 
+
 path_gen = '../data/preprocessed'
+
+path_model = ''
+
+
+
