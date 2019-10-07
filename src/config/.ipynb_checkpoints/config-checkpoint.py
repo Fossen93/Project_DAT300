@@ -1,10 +1,9 @@
 #GAN model values
-img_size = 128
-batch_size = 128
-epochs = 100
+#img_size = 128
+#batch_size = 128
+#epochs = 100
 
-num_gen_mask = 100
-
+#num_gen_mask = 100
 
 
 # Paths
@@ -18,7 +17,7 @@ path_testset = '../data/raw/test_segmentation.csv'
 
 path_gen = '../data/preprocessed'
 
-path_model = ''
+
 
 
 
