@@ -23,21 +23,21 @@ def image_cleaner(path):
     imagelist = listdir(path)
     #iterer igjennom listen
     for i in range(len(imagelist)):
-        full_img_path = path+ '/' + imagelist[i]
-        
-        img = get_img(full_img_path)
-        os.remove(full_img_path)
-        
-        if(not_blank(img)):
-            new_img = undesired_objects(img)
-            torchvision.utils.save_image(torch.from_numpy(new_img), full_img_path)
+        if (imagelist[i].endswith('.jpg')):
+            full_img_path = path+ '/' + imagelist[i]
+            img = get_img(full_img_path)
+            os.remove(full_img_path)
+
+            if(not_blank(img)):
+                new_img = undesired_objects(img)
+                torchvision.utils.save_image(torch.from_numpy(new_img), full_img_path)
             
     new_imagelist = listdir(path)
     name_fixer(path,new_imagelist, imagelist)
     
 def get_img(img_path):
     img = cv2.imread(img_path)
-    cv2.imshow('image', img)
+    #cv2.imshow('image', img)
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     return img_gray
 

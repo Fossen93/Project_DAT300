@@ -48,4 +48,18 @@ def create_model_id(models):
         id_found = (id in models['Id']) is False
             
     return id
+
+def add_model_stats(model_stats, models, overwrite=False):
+    #models = pd.read_csv(path_models + '/model_stats.csv')
+    if model_stats['Id'].values[0] in models['Id'].values:
+        if overwrite:
+            models = models[models.Id != model_stats['Id'].values[0]]
+            models = models.append(model_stats, ignore_index = True)
+        else:
+            print('overwrite=False. Set overwrite to True if you want to delete old model')
+    else:
+        models = models.append(model_stats, ignore_index = True)
+
+    return models
+    #models.to_csv(path_models + '/model_stats.csv', index = False)
         
