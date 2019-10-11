@@ -60,6 +60,20 @@ def add_model_stats(model_stats, models, overwrite=False):
     else:
         models = models.append(model_stats, ignore_index = True)
 
-    return models
-    #models.to_csv(path_models + '/model_stats.csv', index = False)
+    models.to_csv(path_models + '/model_stats.csv', index = False)
+    return models 
         
+def show_batch (df, path_img, path_mask = None):
+
+    images = []
+    for index, row in df.sample(n=4).iterrows(): #glob.glob('images/*.jpg'):
+        images.append(mpimg.imread(path_img + '/' + row['Image']))
+        if(path_mask != None): images.append(mpimg.imread(path_mask + '/' + row['Mask']))
+    
+    plt.figure(figsize=(20,10))
+    columns = 4
+    for i, image in enumerate(images):
+        plt.subplot(len(images) / columns + 1, columns, i + 1)
+        plt.imshow(image)
+
+    return models

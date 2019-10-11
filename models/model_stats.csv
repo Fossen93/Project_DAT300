@@ -1,1 +1,2 @@
 Id,Model,Img_size,Batch_size,Epochs,Num_gen,Date,Time
+43833e,wgan,128,128,30,3000,09/10/2019,13:09:08
