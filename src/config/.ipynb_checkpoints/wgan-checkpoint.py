@@ -11,5 +11,6 @@ path_pre_images = ''
 img_size = 128
 batch_size = 128
 epochs = 30
+weight_decay = 0.
 
 num_gen_mask = 3000

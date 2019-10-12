@@ -16,6 +16,7 @@ def save_pred(generator, path, num_gen):
         random_noise = torch.randn(1, 100, 1, 1, device="cuda:0")
         mask = generator(random_noise)
         torchvision.utils.save_image(mask[0][0], path + '/mask_gen_' + str(i).zfill(5) + ".jpg")
+        sys.stdout.write("\r[Progress: %d/%d]"% (i, num_gen))
         
         
 def image_cleaner(path):
@@ -31,7 +32,7 @@ def image_cleaner(path):
             if(not_blank(img)):
                 new_img = undesired_objects(img)
                 torchvision.utils.save_image(torch.from_numpy(new_img), full_img_path)
-            
+        sys.stdout.write("\r[Progress: %d/%d]"% (i, len(imagelist)))    
     new_imagelist = listdir(path)
     name_fixer(path,new_imagelist, imagelist)
     

@@ -5,6 +5,7 @@ from torchvision.models import vgg16_bn
 from fastai.callbacks import *
 from src.config import *
 import os
+import sys
 
 base_loss = F.l1_loss
 
@@ -48,10 +49,15 @@ def predict(data, path, generator):
     #save_path=path
     if (os.path.isdir(path)==False): os.mkdir(path)
     for i in range(len(data)):
-        img = open_image(data[i])
-        #preds = generator(i)
-        a, pred_img, b = generator.predict(img)
-        torchvision.utils.save_image(pred_img, path + '/img_gen_' + str(i) + '.png')
+        if (data[i].endswith('.jpg') or data[i].endswith('.png')):
+            img = open_image(data[i])
+            #preds = generator(i)
+            _, pred_img, _ = generator.predict(img)
+            s = "_"
+            name = 'img_' + s.join(data[i].split('/')[-1].split('_')[1:])
+            #name = 'img_' + data[i].split('_')[1:]
+            torchvision.utils.save_image(pred_img, path + '/' + name)
+        sys.stdout.write("\r[Progress: %d/%d]"% (i, len(data)))
 #         for o in preds:
 #             name = names[i].split('/')[-1]
 #             o.save(path/name)
@@ -64,9 +70,11 @@ def label_data_critic (org_data, gen_data, path_org, path_gen, classes):
     
     labeled_data = pd.DataFrame(columns=['Filenames', 'label'])
     for i in org_data:
-        labeled_data = labeled_data.append({'Filenames': path_org + '/' + i, 'label': classes[0]}, ignore_index=True)
+        if (i.endswith('.jpg') or i.endswith('.png')):
+            labeled_data = labeled_data.append({'Filenames': path_org + '/' + i, 'label': classes[0]}, ignore_index=True)
     for i in gen_data:
-        labeled_data = labeled_data.append({'Filenames': path_gen + '/' + i, 'label': classes[1]}, ignore_index=True)
+        if (i.endswith('.jpg') or i.endswith('.png')):
+            labeled_data = labeled_data.append({'Filenames': path_gen + '/' + i, 'label': classes[1]}, ignore_index=True)
     
     return labeled_data
         

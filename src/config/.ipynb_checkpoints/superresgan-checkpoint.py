@@ -9,8 +9,10 @@ path_pre_images = ''
 
 #GAN model values
 img_size = 128
-batch_size = 128
-epochs = 30
-weight_decay = 0.
+batch_size = 32
+epochs = 10
+weight_decay = 1e-3
 
 num_gen_mask = 3000
+
+
