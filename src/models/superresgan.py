@@ -42,32 +42,49 @@ def gram_matrix(x):
     x = x.view(n, c, -1)
     return (x @ x.transpose(1,2))/(c*h*w)
 
-def predict(data, path, generator):
-    #i=0
-    
-    #names = dl.dataset.items
-    #save_path=path
+def save_pred(data, generator, path):
+    """Generate images from mask, and saves them
+
+    Parameters
+    ----------
+    data: list
+        full path and name of all the masks
+    generator: nn.Sequential
+        The model that generates the images
+    path: str
+        path for where to save the generated images
+    """
     if (os.path.isdir(path)==False): os.mkdir(path)
     for i in range(len(data)):
         if (data[i].endswith('.jpg') or data[i].endswith('.png')):
             img = open_image(data[i])
-            #preds = generator(i)
             _, pred_img, _ = generator.predict(img)
             s = "_"
             name = 'img_' + s.join(data[i].split('/')[-1].split('_')[1:])
-            #name = 'img_' + data[i].split('_')[1:]
             torchvision.utils.save_image(pred_img, path + '/' + name)
         sys.stdout.write("\r[Progress: %d/%d]"% (i, len(data)))
-#         for o in preds:
-#             name = names[i].split('/')[-1]
-#             o.save(path/name)
-#             i += 1
-            
-#def predict (data, path_pred, generator):
+
     
     
 def label_data_critic (org_data, gen_data, path_org, path_gen, classes):
-    
+    """ Returns df with labeled data for critic
+
+    Parameters
+    ----------
+    org_data: list
+        filenames of original data (Real)
+    gen:data: list
+        filenames of generated data (Fake)
+    path_org: str
+        the path to the original data
+    path_gen: str
+        the path to the generated data
+
+    Returns
+    -------
+    pd.Dataframe
+        containes all data with filename and label
+    """
     labeled_data = pd.DataFrame(columns=['Filenames', 'label'])
     for i in org_data:
         if (i.endswith('.jpg') or i.endswith('.png')):

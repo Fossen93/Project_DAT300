@@ -11,6 +11,17 @@ from fastai.vision import *
 
     
 def save_pred(generator, path, num_gen):
+    """Generate images from random noise, and saves them
+
+    Parameters
+    ----------
+    generator: nn.Sequential
+        The model that generates the images
+    path: str
+        path for where to save the generated images
+    num_gen: int
+        number of images to generate
+    """
     if (os.path.isdir(path)==False): os.mkdir(path)
     for i in range(num_gen):
         random_noise = torch.randn(1, 100, 1, 1, device="cuda:0")
