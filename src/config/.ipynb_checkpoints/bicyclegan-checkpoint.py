@@ -1,0 +1,17 @@
+epoch = 0
+n_epochs = 200
+dataset_name = 'ISIC_seg'
+batch_size = 32
+lr = 0.0002
+b1 = 0.5
+b2 = 0.999
+n_cpu = 8
+img_height = 128
+img_width = 128
+channels = 3
+latent_dim = 8
+sample_interval = 100
+checkpoint_interval = 200
+lambda_pixel = 10
+lambda_latent = 0.5
+lambda_kl = 0.01
